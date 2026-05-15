@@ -1,0 +1,1059 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PalmFit para influenciadores</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f3f6fb;
+        --surface: rgba(255, 255, 255, 0.82);
+        --surface-strong: rgba(255, 255, 255, 0.94);
+        --line: rgba(18, 35, 58, 0.08);
+        --text: #101828;
+        --muted: #5b667a;
+        --primary: #1697f6;
+        --primary-strong: #0476d9;
+        --accent: #ff9a4d;
+        --accent-strong: #ff6f3c;
+        --shadow: 0 24px 80px rgba(23, 40, 74, 0.14);
+        --radius-xl: 32px;
+        --radius-lg: 24px;
+        --radius-md: 18px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Manrope", sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(
+            circle at top left,
+            rgba(22, 151, 246, 0.18),
+            transparent 30%
+          ),
+          radial-gradient(
+            circle at top right,
+            rgba(255, 154, 77, 0.18),
+            transparent 26%
+          ),
+          linear-gradient(180deg, #f8fbff 0%, var(--bg) 48%, #eef3fb 100%);
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .backdrop {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+      }
+
+      .backdrop::before,
+      .backdrop::after {
+        content: "";
+        position: absolute;
+        border-radius: 999px;
+        filter: blur(10px);
+      }
+
+      .backdrop::before {
+        width: 22rem;
+        height: 22rem;
+        top: -7rem;
+        left: -5rem;
+        background: rgba(22, 151, 246, 0.16);
+      }
+
+      .backdrop::after {
+        width: 19rem;
+        height: 19rem;
+        top: 18rem;
+        right: -7rem;
+        background: rgba(255, 154, 77, 0.18);
+      }
+
+      .page {
+        position: relative;
+        z-index: 1;
+        width: min(1200px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 40px 0 72px;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+        gap: 24px;
+        align-items: stretch;
+        margin-bottom: 24px;
+      }
+
+      .hero-panel,
+      .quick-panel,
+      .chapter,
+      .hero-note {
+        background: var(--surface);
+        backdrop-filter: blur(18px);
+        border: 1px solid var(--line);
+        box-shadow: var(--shadow);
+      }
+
+      .hero-panel {
+        border-radius: 36px;
+        padding: 32px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-panel::after {
+        content: "";
+        position: absolute;
+        inset: auto -60px -90px auto;
+        width: 220px;
+        height: 220px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(22, 151, 246, 0.24),
+          transparent 68%
+        );
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(22, 151, 246, 0.1);
+        color: var(--primary-strong);
+        font-size: 0.9rem;
+        font-weight: 800;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+        font-family: "Sora", sans-serif;
+        letter-spacing: -0.03em;
+      }
+
+      h1 {
+        margin-top: 18px;
+        font-size: clamp(2.3rem, 4vw, 4.2rem);
+        line-height: 1.04;
+      }
+
+      .hero-panel p {
+        position: relative;
+        z-index: 1;
+      }
+
+      .lede {
+        max-width: 56ch;
+        margin: 18px 0 22px;
+        color: var(--muted);
+        font-size: 1.06rem;
+        line-height: 1.75;
+      }
+
+      .hero-badges,
+      .chapter-tags,
+      .card-tags,
+      .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .hero-badges span,
+      .chapter-tags span,
+      .card-tags span,
+      .nav-links a {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        min-height: 40px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        border: 1px solid rgba(22, 151, 246, 0.14);
+        background: rgba(255, 255, 255, 0.86);
+        color: #17324f;
+        font-size: 0.95rem;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .quick-panel {
+        border-radius: 32px;
+        padding: 28px;
+        display: grid;
+        gap: 18px;
+        align-content: start;
+      }
+
+      .quick-card {
+        padding: 18px;
+        border-radius: 24px;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.96),
+          rgba(234, 243, 255, 0.9)
+        );
+        border: 1px solid rgba(18, 35, 58, 0.06);
+      }
+
+      .quick-card strong {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 1rem;
+        font-weight: 800;
+      }
+
+      .quick-card p,
+      .hero-note p,
+      .chapter-summary,
+      .shot-copy p,
+      .footer-note {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .hero-note {
+        border-radius: 28px;
+        padding: 20px 24px;
+        margin-bottom: 24px;
+      }
+
+      .hero-note strong {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 800;
+      }
+
+      .section-nav {
+        position: sticky;
+        top: 14px;
+        z-index: 5;
+        margin-bottom: 24px;
+        padding: 14px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.76);
+        backdrop-filter: blur(14px);
+        border: 1px solid rgba(18, 35, 58, 0.08);
+        box-shadow: 0 14px 40px rgba(20, 37, 71, 0.08);
+      }
+
+      .chapter-list {
+        display: grid;
+        gap: 28px;
+      }
+
+      .chapter {
+        border-radius: 34px;
+        padding: 28px;
+      }
+
+      .chapter-header {
+        display: grid;
+        gap: 14px;
+        margin-bottom: 24px;
+      }
+
+      .chapter-kicker {
+        color: var(--primary-strong);
+        font-size: 0.93rem;
+        font-weight: 800;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .chapter-header h2 {
+        font-size: clamp(1.7rem, 3vw, 2.5rem);
+        line-height: 1.1;
+      }
+
+      .chapter-cards {
+        display: grid;
+        gap: 18px;
+      }
+
+      .shot-card {
+        display: grid;
+        grid-template-columns: minmax(260px, 320px) minmax(0, 1fr);
+        gap: 20px;
+        padding: 18px;
+        border-radius: 28px;
+        background: rgba(255, 255, 255, 0.88);
+        border: 1px solid rgba(18, 35, 58, 0.07);
+      }
+
+      .shot-media {
+        position: relative;
+      }
+
+      .shot-frame {
+        position: relative;
+        display: block;
+        overflow: hidden;
+        border-radius: 28px;
+        background: linear-gradient(180deg, #ecf3fb 0%, #dde9f7 100%);
+        box-shadow: 0 16px 36px rgba(16, 24, 40, 0.12);
+      }
+
+      .shot-frame img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      .redaction {
+        position: absolute;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.76);
+        border: 1px solid rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(16px);
+        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
+      }
+
+      .zoom-button {
+        position: absolute;
+        right: 14px;
+        bottom: 14px;
+        z-index: 1;
+        border: 0;
+        border-radius: 999px;
+        padding: 10px 14px;
+        background: rgba(16, 24, 40, 0.78);
+        color: #fff;
+        font: inherit;
+        font-size: 0.92rem;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .shot-copy {
+        display: grid;
+        gap: 14px;
+        align-content: start;
+      }
+
+      .shot-head {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .step-index {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 46px;
+        height: 46px;
+        border-radius: 14px;
+        background: linear-gradient(
+          135deg,
+          var(--accent) 0%,
+          var(--accent-strong) 100%
+        );
+        color: #fff;
+        font-family: "Sora", sans-serif;
+        font-size: 1rem;
+        font-weight: 800;
+        box-shadow: 0 12px 20px rgba(255, 111, 60, 0.24);
+      }
+
+      .shot-copy h3 {
+        font-size: 1.24rem;
+        line-height: 1.2;
+      }
+
+      .shot-copy strong {
+        color: var(--text);
+      }
+
+      .image-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        justify-self: start;
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: rgba(22, 151, 246, 0.1);
+        color: var(--primary-strong);
+        font-size: 0.92rem;
+        font-weight: 800;
+        text-decoration: none;
+      }
+
+      .footer-note {
+        margin-top: 28px;
+        padding: 22px 24px;
+        border-radius: 26px;
+        background: rgba(255, 255, 255, 0.76);
+        border: 1px solid rgba(18, 35, 58, 0.08);
+      }
+
+      .lightbox {
+        position: fixed;
+        inset: 0;
+        z-index: 20;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        background: rgba(8, 15, 28, 0.82);
+        backdrop-filter: blur(8px);
+      }
+
+      .lightbox[hidden] {
+        display: none;
+      }
+
+      .lightbox-card {
+        position: relative;
+        width: min(460px, calc(100vw - 32px));
+        padding: 14px;
+        border-radius: 28px;
+        background: rgba(255, 255, 255, 0.96);
+        box-shadow: 0 28px 80px rgba(0, 0, 0, 0.34);
+      }
+
+      .lightbox-card img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 22px;
+      }
+
+      .lightbox-close {
+        position: absolute;
+        right: 22px;
+        top: 22px;
+        border: 0;
+        width: 42px;
+        height: 42px;
+        border-radius: 999px;
+        background: rgba(16, 24, 40, 0.8);
+        color: #fff;
+        font: inherit;
+        font-size: 1.1rem;
+        font-weight: 800;
+        cursor: pointer;
+      }
+
+      @media (max-width: 920px) {
+        .hero {
+          grid-template-columns: 1fr;
+        }
+
+        .shot-card {
+          grid-template-columns: 1fr;
+        }
+
+        .shot-media {
+          max-width: 360px;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .page {
+          width: min(100% - 18px, 1200px);
+          padding: 20px 0 48px;
+        }
+
+        .hero-panel,
+        .quick-panel,
+        .chapter {
+          border-radius: 24px;
+          padding: 20px;
+        }
+
+        .hero-note {
+          border-radius: 20px;
+          padding: 18px;
+        }
+
+        .section-nav {
+          top: 10px;
+          padding: 10px;
+          border-radius: 22px;
+        }
+
+        .nav-links {
+          overflow-x: auto;
+          flex-wrap: nowrap;
+          padding-bottom: 2px;
+        }
+
+        .nav-links a {
+          white-space: nowrap;
+        }
+
+        .shot-card {
+          padding: 14px;
+          border-radius: 22px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="backdrop"></div>
+    <div class="page">
+      <header class="hero">
+        <section class="hero-panel">
+          <span class="eyebrow">Guia visual do app</span>
+          <h1>PalmFit para influenciadores</h1>
+          <p class="lede">
+            Esta página transforma as capturas reais do app em um roteiro
+            simples para entender a jornada do aluno, os pontos de retenção e os
+            recursos sociais que mais ajudam quem divulga, publica ou
+            compartilha treinos no PalmFit.
+          </p>
+          <div class="hero-badges">
+            <span>47 capturas reais</span>
+            <span>Fluxo do aluno ao criador</span>
+            <span>Leitura rápida por capítulos</span>
+          </div>
+        </section>
+
+        <aside class="quick-panel">
+          <div class="quick-card">
+            <strong>O que esta página resolve</strong>
+            <p>
+              Resume o app inteiro em blocos curtos, para você mostrar a
+              experiência sem precisar gravar um tour do zero.
+            </p>
+          </div>
+          <div class="quick-card">
+            <strong>Como ler</strong>
+            <p>
+              As primeiras telas mostram o que o aluno vê. As últimas focam nas
+              áreas que mais importam para grupos, treinos publicados e perfil.
+            </p>
+          </div>
+          <div class="quick-card">
+            <strong>Foco para influenciadores</strong>
+            <p>
+              Preste mais atenção nos capítulos de grupos, famosos e perfil: são
+              eles que mais convertem atenção em comunidade e prova social.
+            </p>
+          </div>
+        </aside>
+      </header>
+
+      <section class="hero-note">
+        <strong>Observação importante</strong>
+        <p>
+          Algumas áreas sensíveis das capturas foram suavizadas visualmente para
+          evitar exposição desnecessária de dados pessoais. O restante do fluxo
+          foi preservado para manter a leitura fiel do produto.
+        </p>
+      </section>
+
+      <nav class="section-nav" aria-label="Capítulos do guia">
+        <div class="nav-links">
+          <a href="#onboarding">1. Entrada e onboarding</a>
+          <a href="#session">2. Plano e sessão</a>
+          <a href="#training-tools">3. Criação de treinos</a>
+          <a href="#student-tools">4. Ferramentas do aluno</a>
+          <a href="#social">5. Social e perfil</a>
+        </div>
+      </nav>
+
+      <main id="guide" class="chapter-list"></main>
+
+      <footer class="footer-note">
+        Se você for usar este material como landing, apresentação comercial ou
+        página interna para creators, vale começar pelos capítulos 5, 2 e 3,
+        nessa ordem. É ali que o valor percebido do PalmFit fica mais claro para
+        quem quer publicar treino, ativar comunidade e dar continuidade ao uso.
+      </footer>
+    </div>
+
+    <div class="lightbox" id="lightbox" hidden>
+      <div class="lightbox-card">
+        <button class="lightbox-close" type="button" aria-label="Fechar imagem">
+          ×
+        </button>
+        <img id="lightbox-image" alt="Visualização ampliada da captura" />
+      </div>
+    </div>
+
+    <script>
+      const guideSections = [
+        {
+          id: "onboarding",
+          kicker: "Capítulo 1",
+          title: "Entrada e onboarding do aluno",
+          summary:
+            "Estas capturas mostram o primeiro contato com o app, a coleta de contexto e a montagem do plano inicial. Para influenciadores, é o melhor ponto para entender como um seguidor entra no ecossistema do PalmFit.",
+          tags: ["Primeira impressão", "Plano personalizado", "Baixo atrito"],
+          items: [
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-10-22-836_com.google.android.permissioncontroller.jpg",
+              title: "Permissão de notificações",
+              what: "O sistema pede autorização para avisos de descanso, lembretes de treino e notificações úteis.",
+              why: "Quando o aluno libera isso cedo, o app ganha mais chance de trazê-lo de volta e sustentar retenção.",
+            },
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-10-25-357_com.tools.palmfit.jpg",
+              title: "Escolha entre entrar ou começar do zero",
+              what: "A tela inicial separa quem já tem conta de quem vai iniciar a experiência personalizada.",
+              why: "Esse ponto é bom para orientar seguidores novos sem confundir quem já usa o app.",
+            },
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-10-31-206_com.tools.palmfit.jpg",
+              title: "Definição de sexo",
+              what: "O onboarding começa capturando sexo para calibrar recomendações e parâmetros físicos.",
+              why: "Isso ajuda a justificar que o plano nasce com contexto real e não como treino genérico.",
+            },
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-10-40-391_com.tools.palmfit.jpg",
+              title: "Perguntas rápidas de experiência",
+              what: "O app pergunta se a pessoa já treinou em academia e se já usou app parecido.",
+              why: "Essas respostas encurtam o caminho do iniciante e deixam o plano mais compatível com o nível real.",
+            },
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-10-47-061_com.tools.palmfit.jpg",
+              title: "Objetivo principal",
+              what: "A pessoa escolhe se quer força, hipertrofia, definição, emagrecimento, saúde ou desempenho.",
+              why: "É aqui que você pode alinhar sua comunicação com o objetivo que mais conversa com seu público.",
+            },
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-10-51-815_com.tools.palmfit.jpg",
+              title: "Altura com seletor visual",
+              what: "A altura é ajustada com um controle visual simples, incluindo troca de unidade.",
+              why: "O fluxo mantém sensação de produto premium mesmo em uma etapa técnica.",
+            },
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-10-55-384_com.tools.palmfit.jpg",
+              title: "Peso atual com leitura de IMC",
+              what: "Além do peso, o app devolve uma interpretação rápida do IMC em tempo real.",
+              why: "Esse retorno imediato reforça utilidade e dá percepção de personalização desde cedo.",
+            },
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-10-57-708_com.tools.palmfit.jpg",
+              title: "Meta de peso",
+              what: "O usuário define a meta e recebe uma leitura direta do rumo que escolheu.",
+              why: "Isso ajuda a conectar objetivo e expectativa, algo importante para retenção e promessa de evolução.",
+            },
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-11-01-507_com.tools.palmfit.jpg",
+              title: "Nível de preparo físico",
+              what: "A pessoa escolhe entre iniciante, intermediário e avançado.",
+              why: "Esse recorte evita empurrar conteúdo complexo cedo demais e reduz abandono nos primeiros dias.",
+            },
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-11-06-470_com.tools.palmfit.jpg",
+              title: "Equipamentos disponíveis",
+              what: "O app adapta o treino conforme os equipamentos que a pessoa realmente tem acesso.",
+              why: "É um argumento forte para creators que falam com público de academia, casa ou rotina híbrida.",
+            },
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-11-11-764_com.tools.palmfit.jpg",
+              title: "Plano pronto para começar",
+              what: "O onboarding fecha com um resumo visual da meta, do foco corporal e da linha de evolução esperada.",
+              why: "Esse resumo vira uma ótima peça para mostrar que o PalmFit entrega direção logo no primeiro uso.",
+            },
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-11-16-600_com.tools.palmfit.jpg",
+              title: "Tour rápido do plano",
+              what: "Antes de abrir a jornada principal, o app oferece um mini tour com o que importa naquela tela.",
+              why: "Esse tipo de ajuda reduz atrito e diminui a necessidade de suporte manual para novos seguidores.",
+            },
+          ],
+        },
+        {
+          id: "session",
+          kicker: "Capítulo 2",
+          title: "Plano personalizado, sessão e pós-treino",
+          summary:
+            "Aqui aparece o que acontece quando o aluno entra no plano, executa a sessão e recebe estímulos de continuidade. É uma parte essencial para creators que querem mostrar resultado e rotina, não só descoberta.",
+          tags: ["Execução guiada", "Lembretes", "Compartilhamento"],
+          items: [
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-11-30-282_com.tools.palmfit.jpg",
+              title: "Visão do Dia 1",
+              what: "A tela do plano mostra o dia atual, o foco da sessão e o mapa muscular trabalhado.",
+              why: "É o ponto ideal para o seguidor entender o que fazer hoje sem precisar montar a rotina sozinho.",
+            },
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-11-41-079_com.tools.palmfit.jpg",
+              title: "Sessão de treino em execução",
+              what: "A execução do treino traz série atual, repetições, peso, próximo exercício e botão de descanso.",
+              why: "O app deixa a sessão prática o suficiente para ser usada no treino real, não só como consulta.",
+            },
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-11-54-687_com.tools.palmfit.jpg",
+              title: "Ajuste de séries dentro da sessão",
+              what: "Sem sair da tela principal, a pessoa pode ajustar série atual e total de séries.",
+              why: "Isso ajuda quem adapta treino ao vivo e evita frustração quando a ficha precisa mudar.",
+            },
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-12-01-120_com.tools.palmfit.jpg",
+              title: "Descanso ativo e histórico na mesma tela",
+              what: "Depois da série, o descanso entra em cena com timer e o histórico parcial aparece logo abaixo.",
+              why: "Esse desenho mantém foco, reduz troca de contexto e reforça sensação de acompanhamento real.",
+            },
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-12-08-450_com.tools.palmfit.jpg",
+              title: "Configuração do descanso",
+              what: "A pessoa escolhe duração, toggle de timer, notificações e som do alerta final.",
+              why: "É um ponto importante para mostrar que o app respeita estilos de treino diferentes.",
+            },
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-12-15-635_com.tools.palmfit.jpg",
+              title: "Encerramento seguro da sessão",
+              what: "Ao sair, o app confirma que o treino atual será salvo no histórico.",
+              why: "Esse detalhe passa confiança e reduz medo de perder progresso no meio da rotina.",
+            },
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-12-39-926_com.tools.palmfit.jpg",
+              title: "Resumo pós-treino com compartilhamento",
+              what: "Depois da sessão, o usuário pode adicionar legenda, foto e compartilhar o resultado no grupo.",
+              why: "Para influenciadores, é um dos melhores ganchos de engajamento e prova social dentro do app.",
+            },
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-12-46-253_com.tools.palmfit.jpg",
+              title: "Convite para ativar lembrete diário",
+              what: "Após o primeiro treino, o app sugere um lembrete no horário mais estratégico.",
+              why: "Esse momento aproveita a motivação do pós-treino para aumentar retorno no dia seguinte.",
+            },
+          ],
+        },
+        {
+          id: "training-tools",
+          kicker: "Capítulo 3",
+          title: "Criação de treinos, catálogos e biblioteca própria",
+          summary:
+            "Este bloco mostra como o app escala de um treino guiado para uma plataforma de conteúdo: trocar nível, gerar rotinas, salvar fichas, explorar treinos prontos e editar detalhes de exercícios.",
+          tags: ["Gerador visual", "Catálogo", "Treinos próprios"],
+          items: [
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-13-17-155_com.tools.palmfit.jpg",
+              title: "Mudança de nível de acesso",
+              what: "O seletor libera a navegação entre iniciante, médio e avançado dentro da área de treinos.",
+              why: "Isso ajuda você a explicar que o app cresce junto com o aluno em vez de travar a evolução.",
+            },
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-13-23-454_com.tools.palmfit.jpg",
+              title: "Aba Meus treinos vazia, pronta para uso",
+              what: "Quando ainda não há fichas próprias, o app mostra dois caminhos claros: criar ou gerar treino.",
+              why: "A tela reduz o medo de começar e facilita a primeira ação útil para o usuário avançado.",
+            },
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-13-30-990_com.tools.palmfit.jpg",
+              title: "Gerador visual por músculos",
+              what: "A criação automática acontece tocando nos grupos musculares e definindo o objetivo.",
+              why: "Para creators, é um recurso excelente para mostrar rapidez sem perder sensação de personalização.",
+            },
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-13-35-830_com.tools.palmfit.jpg",
+              title: "Treino gerado automaticamente",
+              what: "O app monta a rotina, lista exercícios e permite salvar a seleção gerada.",
+              why: "Esse é um bom print para comunicar praticidade e velocidade de entrega.",
+            },
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-13-44-506_com.tools.palmfit.jpg",
+              title: "Treino salvo na biblioteca pessoal",
+              what: "Depois de salvo, o treino entra em Meus treinos com mapa muscular, ações rápidas e dia da semana.",
+              why: "É aqui que o aluno começa a montar rotina própria e o app passa a ser ferramenta recorrente.",
+            },
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-14-05-237_com.tools.palmfit.jpg",
+              title: "Catálogo de treinos predefinidos",
+              what: "Além do conteúdo autoral, há uma biblioteca pronta com busca, filtros e categorias.",
+              why: "Esse catálogo ajuda na descoberta e reduz o risco de o aluno ficar sem ideia do que fazer.",
+            },
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-14-14-058_com.tools.palmfit.jpg",
+              title: "Detalhe de treino pronto",
+              what: "Ao abrir um treino predefinido, a pessoa vê ações para iniciar, duplicar, compartilhar e revisar a ficha.",
+              why: "Isso mostra que o app não é só lista de exercícios: é um repositório acionável de conteúdo.",
+            },
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-14-28-948_com.tools.palmfit.jpg",
+              title: "Detalhe do treino personalizado",
+              what: "A ficha autoral permite adicionar itens, iniciar o treino, compartilhar e organizar a lista de exercícios.",
+              why: "É o trecho que mais aproxima o app da rotina de quem gosta de montar o próprio método.",
+            },
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-14-37-404_com.tools.palmfit.jpg",
+              title: "Configuração por exercício",
+              what: "Cada exercício tem sets, reps, peso e preview visual reunidos em uma tela específica.",
+              why: "Esse nível de detalhe ajuda a vender profundidade sem parecer complicado para usar.",
+            },
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-14-41-892_com.tools.palmfit.jpg",
+              title: "Músculos alvo e instruções",
+              what: "A mesma tela entrega mapa muscular e explicação passo a passo de execução.",
+              why: "Para seguidores iniciantes, isso reduz insegurança e melhora a confiança na execução.",
+            },
+          ],
+        },
+        {
+          id: "student-tools",
+          kicker: "Capítulo 4",
+          title: "Ferramentas do aluno para rotina, acompanhamento e suporte",
+          summary:
+            "Este capítulo concentra tudo o que aumenta utilidade no dia a dia: atalhos, nutrição, recuperação, histórico, feedback, favoritos e estatísticas. É a parte que faz o app continuar valioso mesmo fora do treino.",
+          tags: ["Utilidade diária", "Retenção", "Acompanhamento"],
+          items: [
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-14-50-533_com.tools.palmfit.jpg",
+              title: "Home com atalhos principais",
+              what: "A tela inicial organiza treino do dia, busca de exercícios, gerador, calculadoras, nutrição e recuperação.",
+              why: "Esse mosaico ajuda você a mostrar rapidamente a amplitude do produto em um único print.",
+            },
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-15-01-168_com.tools.palmfit.jpg",
+              title: "Base nutricional",
+              what: "O módulo de nutrição reúne alimentos, categorias, busca e metas de macronutrientes.",
+              why: "Mesmo que o foco da sua divulgação seja treino, este bloco aumenta percepção de solução completa.",
+            },
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-15-06-612_com.tools.palmfit.jpg",
+              title: "Recuperação por grupo muscular",
+              what: "O app mostra como cada grupo muscular está se recuperando após os treinos.",
+              why: "É um diferencial bom para comunicar inteligência de rotina e não só prescrição de ficha.",
+            },
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-15-10-700_com.tools.palmfit.jpg",
+              title: "Histórico e lembretes em calendário",
+              what: "A pessoa acompanha o lembrete diário, navega no calendário e revisita o treino concluído.",
+              why: "Essa tela ajuda a provar consistência e reforça que progresso fica registrado.",
+            },
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-15-14-483_com.tools.palmfit.jpg",
+              title: "Feedback dentro do app",
+              what: "O PalmFit coleta avaliação recente e contexto do uso diretamente pela interface.",
+              why: "É útil para creators entenderem que o produto tem canal interno para evoluir com o público.",
+            },
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-15-17-862_com.tools.palmfit.jpg",
+              title: "Favoritos",
+              what: "A área de favoritos fica pronta para organizar itens salvos, mesmo quando ainda está vazia.",
+              why: "É uma peça menor, mas mostra espaço para curadoria pessoal do aluno.",
+            },
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-15-35-678_com.tools.palmfit.jpg",
+              title: "Resumo rápido de estatísticas",
+              what: "A tela consolida peso levantado, treinos registrados, exercícios concluídos e média semanal.",
+              why: "Ótimo print para reforçar resultado mensurável e percepção de progresso.",
+            },
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-15-44-762_com.tools.palmfit.jpg",
+              title: "Gráficos e equivalências de desempenho",
+              what: "O período ganha leitura visual com gráficos de volume, frequência e comparações simbólicas.",
+              why: "Esse tipo de visual costuma converter bem em conteúdo porque traduz dado em narrativa simples.",
+            },
+          ],
+        },
+        {
+          id: "social",
+          kicker: "Capítulo 5",
+          title: "Recursos sociais, famosos e perfil do influenciador",
+          summary:
+            "Este é o trecho mais estratégico para creators. Ele mostra o acesso a grupos, mural, ranking, catálogo de famosos, login Google, publicação de identidade e comparador de transformação.",
+          tags: ["Comunidade", "Prova social", "Presença do creator"],
+          items: [
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-16-03-497_com.tools.palmfit.jpg",
+              title: "Primeiro acesso ao módulo de grupos",
+              what: "A tela apresenta o período de acesso liberado e convida a criar o primeiro grupo de treino.",
+              why: "Boa imagem para comunicar comunidade sem exigir que o aluno já esteja organizado desde o dia zero.",
+            },
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-16-13-330_com.tools.palmfit.jpg",
+              title: "Perfil antes do login",
+              what: "Sem autenticação, o perfil explica o papel do login Google e prepara o espaço do nome público.",
+              why: "É o melhor print para explicar ao creator por que conectar conta é o primeiro passo sério.",
+            },
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-16-33-655_com.tools.palmfit.jpg",
+              title: "Confirmação de login Google",
+              what: "Após autenticar, o app confirma o sucesso do login diretamente no perfil.",
+              why: "É uma confirmação simples, mas importante para reduzir dúvida no momento de entrada do creator.",
+              redactions: [{ top: 11, left: 7, width: 81, height: 19 }],
+            },
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-17-00-426_com.tools.palmfit.jpg",
+              title: "Comparador de transformação no perfil",
+              what: "O perfil premium mostra a área de antes e depois com atualização registrada e CTA de troca de imagens.",
+              why: "Essa é uma das telas de maior apelo visual para creators que vendem progresso e prova real.",
+              redactions: [
+                { top: 38, left: 5, width: 43, height: 28 },
+                { top: 38, left: 51, width: 43, height: 28 },
+              ],
+            },
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-17-11-253_com.tools.palmfit.jpg",
+              title: "Treino publicado em Famosos",
+              what: "O catálogo de famosos mostra o treino com capa forte, filtros e ações para iniciar, duplicar ou compartilhar.",
+              why: "Aqui o creator enxerga claramente como seu conteúdo pode ganhar cara de produto dentro do app.",
+            },
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-17-32-101_com.tools.palmfit.jpg",
+              title: "Grupo ativo com painel de progresso",
+              what: "Quando o grupo existe, a tela mostra XP, integrantes, convites em aberto e seleção do grupo atual.",
+              why: "Esse resumo é valioso para creators que querem transformar treino em comunidade recorrente.",
+            },
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-17-38-351_com.tools.palmfit.jpg",
+              title: "Ranking de integrantes",
+              what: "Os membros aparecem com medalhas, pontuação, quantidade de treinos e fotos compartilhadas.",
+              why: "Gamificação visual como essa costuma aumentar disputa saudável e participação no grupo.",
+              redactions: [
+                { top: 23, left: 27, width: 54, height: 4.8 },
+                { top: 38, left: 27, width: 58, height: 4.8 },
+                { top: 54, left: 27, width: 54, height: 4.8 },
+                { top: 69, left: 27, width: 54, height: 4.8 },
+              ],
+            },
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-17-42-953_com.tools.palmfit.jpg",
+              title: "Convites pendentes e mural do grupo",
+              what: "A mesma área reúne convites por e-mail e posts compartilhados com dados do treino.",
+              why: "Esse é um bom exemplo de como o creator pode puxar engajamento sem sair do fluxo do app.",
+              redactions: [
+                { top: 10, left: 8, width: 44, height: 6 },
+                { top: 30, left: 18, width: 42, height: 5 },
+              ],
+            },
+            {
+              file: "screenshots/Screenshot_2026-05-15-01-18-03-789_com.tools.palmfit.jpg",
+              title: "Mural com múltiplas publicações",
+              what: "O mural empilha posts recentes com resumo do treino, badges e CTA direto para iniciar.",
+              why: "É uma mecânica forte para transformar treino em conversa, descoberta e repetição dentro do grupo.",
+              redactions: [
+                { top: 20, left: 18, width: 43, height: 4.8 },
+                { top: 41, left: 18, width: 43, height: 4.8 },
+              ],
+            },
+          ],
+        },
+      ];
+
+      const guideRoot = document.getElementById("guide");
+      let stepIndex = 0;
+
+      function renderRedactions(redactions = []) {
+        return redactions
+          .map(
+            (item) =>
+              `<span class="redaction" style="top:${item.top}%;left:${item.left}%;width:${item.width}%;height:${item.height}%"></span>`,
+          )
+          .join("");
+      }
+
+      function renderCard(item, index) {
+        return `
+          <article class="shot-card">
+            <div class="shot-media">
+              <div class="shot-frame">
+                <img src="${item.file}" alt="${item.title}" loading="lazy" />
+                ${renderRedactions(item.redactions)}
+                <button class="zoom-button" type="button" data-image="${item.file}" data-title="${item.title}">
+                  Ampliar
+                </button>
+              </div>
+            </div>
+            <div class="shot-copy">
+              <div class="shot-head">
+                <span class="step-index">${String(index).padStart(2, "0")}</span>
+                <h3>${item.title}</h3>
+              </div>
+              <div class="card-tags">
+                <span>O que aparece</span>
+                <span>Por que importa</span>
+              </div>
+              <p><strong>O que aparece:</strong> ${item.what}</p>
+              <p><strong>Por que isso importa:</strong> ${item.why}</p>
+              <a class="image-link" href="${item.file}" target="_blank" rel="noopener">Abrir imagem original</a>
+            </div>
+          </article>
+        `;
+      }
+
+      guideRoot.innerHTML = guideSections
+        .map((section) => {
+          const cards = section.items
+            .map((item) => {
+              stepIndex += 1;
+              return renderCard(item, stepIndex);
+            })
+            .join("");
+
+          return `
+            <section class="chapter" id="${section.id}">
+              <div class="chapter-header">
+                <span class="chapter-kicker">${section.kicker}</span>
+                <h2>${section.title}</h2>
+                <p class="chapter-summary">${section.summary}</p>
+                <div class="chapter-tags">
+                  ${section.tags.map((tag) => `<span>${tag}</span>`).join("")}
+                </div>
+              </div>
+              <div class="chapter-cards">
+                ${cards}
+              </div>
+            </section>
+          `;
+        })
+        .join("");
+
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImage = document.getElementById("lightbox-image");
+      const lightboxClose = document.querySelector(".lightbox-close");
+
+      function closeLightbox() {
+        lightbox.hidden = true;
+        lightboxImage.removeAttribute("src");
+      }
+
+      document.addEventListener("click", (event) => {
+        const button = event.target.closest(".zoom-button");
+        if (button) {
+          lightboxImage.src = button.dataset.image;
+          lightboxImage.alt = button.dataset.title;
+          lightbox.hidden = false;
+          return;
+        }
+
+        if (event.target === lightbox) {
+          closeLightbox();
+        }
+      });
+
+      lightboxClose.addEventListener("click", closeLightbox);
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && !lightbox.hidden) {
+          closeLightbox();
+        }
+      });
+    </script>
+  </body>
+</html>
