@@ -1,12 +1,13 @@
 # app-ads
 
-Home publicada em GitHub Pages a partir do snapshot estatico do `palmfit-site`.
+Site publico do dominio `www.devcraftltda.space`, publicado via GitHub Pages.
 
-Atualizacao da home:
+Arquivos principais:
 
-```bash
-cd ../palmfit-site
-npm run build
-cd ../app-ads
-node sync-home-from-palmfit-site.mjs
-```
+- `index.html`: home institucional da DEV CRAFT LTDA
+- `palmfit-politica-de-privacidade.html`: politica publica do PalmFit com identificacao da empresa
+
+Manutencao:
+
+- edite `index.html` para ajustes da pagina institucional
+- edite `palmfit-politica-de-privacidade.html` para ajustes de privacidade e contato publico

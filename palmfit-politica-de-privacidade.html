@@ -1,139 +1,455 @@
-<div
-  style="
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-  "
->
-  <h1>Política de Privacidade do PalmFit</h1>
-  <p><strong>Última atualização: Abril de 2026</strong></p>
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Politica de Privacidade do PalmFit | DEV CRAFT LTDA</title>
+    <meta
+      name="description"
+      content="Politica de Privacidade do PalmFit, produto operado pela DEV CRAFT LTDA, com informacoes sobre coleta, uso, retencao, exclusao e canais de contato."
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f6f9fc;
+        --surface: rgba(255, 255, 255, 0.92);
+        --ink: #10233a;
+        --muted: #596b7d;
+        --line: rgba(16, 35, 58, 0.1);
+        --brand: #0c8df6;
+        --brand-deep: #075fb5;
+        --shadow: 0 24px 60px rgba(16, 35, 58, 0.12);
+        --radius-xl: 30px;
+        --radius-lg: 22px;
+        --max-width: 920px;
+      }
 
-  <p>
-    Esta Política de Privacidade descreve como coletamos, usamos, retemos,
-    compartilhamos e excluímos suas informações pessoais ao utilizar nosso
-    aplicativo PalmFit ("o Aplicativo"), disponível na Play Store.
-  </p>
+      * {
+        box-sizing: border-box;
+      }
 
-  <p>
-    Ao utilizar o Aplicativo, você concorda com a coleta e o uso de suas
-    informações de acordo com esta Política de Privacidade.
-  </p>
+      body {
+        margin: 0;
+        font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+        color: var(--ink);
+        background:
+          radial-gradient(
+            circle at top left,
+            rgba(12, 141, 246, 0.14),
+            transparent 28%
+          ),
+          linear-gradient(180deg, #fbfdff 0%, var(--bg) 100%);
+      }
 
-  <h2>1. Coleta de Informações Pessoais</h2>
-  <p>
-    Coletamos informações pessoais que você nos fornece diretamente, bem como
-    dados coletados automaticamente durante o uso do Aplicativo.
-  </p>
+      a {
+        color: var(--brand-deep);
+        text-decoration: none;
+      }
 
-  <h3>Informações fornecidas por você</h3>
-  <ul>
-    <li>
-      <strong>Dados de Registro:</strong> Caso você utilize a sincronização com
-      o Firebase, podemos armazenar dados de perfil como nome, e-mail e foto de
-      perfil.
-    </li>
-    <li>
-      <strong>Dados de Login:</strong> O Aplicativo permite que você faça login
-      com sua conta Google. Ao escolher essa opção, coletamos as informações de
-      perfil publicamente disponíveis fornecidas pelo Google.
-    </li>
-  </ul>
+      .page {
+        width: min(100%, var(--max-width));
+        margin: 0 auto;
+        padding: 24px 16px 56px;
+      }
 
-  <h3>Informações coletadas automaticamente</h3>
-  <ul>
-    <li>
-      <strong>Dados do Dispositivo:</strong> Coletamos informações sobre seu
-      dispositivo, incluindo o tipo, modelo, sistema operacional,
-      identificadores únicos e informações de rede.
-    </li>
-    <li>
-      <strong>Localização Geográfica:</strong> Caso você conceda permissão,
-      coletamos sua localização geográfica para fornecer funcionalidades
-      baseadas em geolocalização.
-    </li>
-    <li>
-      <strong>Dados de Uso:</strong> Registramos informações sobre como você
-      interage com o Aplicativo, incluindo páginas acessadas, recursos
-      utilizados e tempo de uso.
-    </li>
-    <li>
-      <strong>Endereço IP:</strong> Coletamos seu endereço IP para fins de
-      segurança, prevenção de fraudes e análise de dados.
-    </li>
-    <li>
-      <strong>Identificadores de Publicidade:</strong> Coletamos identificadores
-      de publicidade do seu dispositivo para personalizar anúncios exibidos.
-    </li>
-  </ul>
+      .topbar,
+      .content,
+      .footer {
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        border-radius: var(--radius-xl);
+        background: var(--surface);
+        box-shadow: var(--shadow);
+      }
 
-  <h2>2. Uso das Informações Coletadas</h2>
-  <p>As informações coletadas são usadas para as seguintes finalidades:</p>
-  <ul>
-    <li>
-      <strong>Melhorar a Experiência:</strong> Usamos os dados de uso e
-      comportamento para entender como o Aplicativo é utilizado, o que nos
-      permite corrigir bugs e melhorar a experiência do usuário.
-    </li>
-    <li>
-      <strong>Comunicação:</strong> Utilizamos o seu e-mail para enviar
-      notificações sobre o Aplicativo e comunicar novidades, funcionalidades ou
-      outras informações relevantes.
-    </li>
-    <li>
-      <strong>Funcionalidades Específicas:</strong> A localização geográfica é
-      usada para fornecer serviços e funcionalidades que dependem de
-      geolocalização, como mapas.
-    </li>
-    <li>
-      <strong>Personalização de Anúncios:</strong> Usamos identificadores de
-      publicidade para exibir anúncios relevantes para você.
-    </li>
-  </ul>
+      .topbar,
+      .footer {
+        padding: 18px 22px;
+      }
 
-  <h2>3. Retenção e Exclusão de Dados</h2>
-  <h3>Retenção de Dados</h3>
-  <p>
-    Os dados coletados pelo PalmFit são retidos enquanto você utilizar o
-    aplicativo e manter sua conta ativa, quando aplicável.
-  </p>
-  <ul>
-    <li>
-      Dados armazenados localmente no dispositivo (por exemplo, configurações,
-      favoritos, histórico, treinos e diário de nutrição) permanecem no
-      dispositivo enquanto o aplicativo estiver instalado.
-    </li>
-    <li>
-      Dados sincronizados com o Firebase Firestore são mantidos enquanto sua
-      conta de sincronização permanecer ativa.
-    </li>
-  </ul>
-  <p>
-    Não há um prazo de retenção automático; os dados são mantidos até que você
-    solicite a exclusão ou desinstale o aplicativo.
-  </p>
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
 
-  <h3>Como excluir seus dados</h3>
-  <p>
-    Para excluir seus dados do aplicativo, use a opção "Excluir conta e dados"
-    disponível na tela de Perfil, quando estiver usando sincronização com o
-    Firebase. Essa ação:
-  </p>
-  <ul>
-    <li>remove sua conta do Firebase Authentication;</li>
-    <li>
-      apaga todos os backups e dados armazenados em nuvem no Firestore em
-      <code>users/{uid}</code>;
-    </li>
-    <li>limpa os dados de usuário salvos localmente no dispositivo.</li>
-  </ul>
-  <p>
-    Se você não estiver usando a sincronização com Firebase, os dados locais
-    podem ser excluídos desinstalando o aplicativo do seu dispositivo.
-  </p>
-  <p>
-    Após a exclusão, não mantemos seus dados pessoais no app ou no servidor,
-    salvo obrigações legais.
-  </p>
-</div>
+      .topbar strong {
+        display: block;
+        font-size: 1rem;
+        letter-spacing: -0.03em;
+      }
+
+      .topbar span,
+      .footer,
+      .footer p {
+        color: var(--muted);
+      }
+
+      .content {
+        margin-top: 18px;
+        padding: 28px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        min-height: 38px;
+        padding: 0 14px;
+        border-radius: 999px;
+        background: rgba(12, 141, 246, 0.1);
+        color: var(--brand-deep);
+        font-size: 0.84rem;
+        font-weight: 800;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3,
+      p,
+      ul {
+        margin: 0;
+      }
+
+      h1 {
+        margin-top: 18px;
+        font-size: clamp(2.2rem, 5vw, 4rem);
+        line-height: 0.98;
+        letter-spacing: -0.05em;
+      }
+
+      .intro {
+        margin-top: 16px;
+        color: var(--muted);
+        line-height: 1.74;
+      }
+
+      .callout-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 22px;
+      }
+
+      .callout {
+        padding: 18px;
+        border-radius: var(--radius-lg);
+        background: rgba(255, 255, 255, 0.84);
+        border: 1px solid var(--line);
+      }
+
+      .callout strong {
+        display: block;
+        font-size: 1rem;
+        letter-spacing: -0.03em;
+      }
+
+      .callout span {
+        display: block;
+        margin-top: 8px;
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .policy {
+        display: grid;
+        gap: 24px;
+        margin-top: 28px;
+      }
+
+      .policy section {
+        display: grid;
+        gap: 12px;
+      }
+
+      h2 {
+        font-size: 1.55rem;
+        letter-spacing: -0.03em;
+      }
+
+      h3 {
+        font-size: 1.1rem;
+        letter-spacing: -0.02em;
+      }
+
+      p,
+      li {
+        color: var(--muted);
+        line-height: 1.72;
+      }
+
+      ul {
+        padding-left: 20px;
+      }
+
+      .footer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 14px;
+        margin-top: 18px;
+      }
+
+      @media (max-width: 720px) {
+        .topbar,
+        .footer {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .content {
+          padding: 22px;
+        }
+
+        .callout-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="topbar">
+        <div>
+          <strong>DEV CRAFT LTDA</strong>
+          <span
+            >Organizacao responsavel pelo PalmFit em devcraftltda.space</span
+          >
+        </div>
+        <a href="./index.html">Voltar para o site institucional</a>
+      </div>
+
+      <main class="content">
+        <span class="eyebrow">Privacidade</span>
+        <h1>Politica de Privacidade do PalmFit</h1>
+        <p class="intro">
+          Esta politica descreve como o PalmFit coleta, usa, retem, compartilha
+          e exclui informacoes pessoais. O PalmFit e um produto operado pela
+          <strong>DEV CRAFT LTDA</strong>, CNPJ
+          <strong>61.174.672/0001-08</strong>, com nome fantasia
+          <strong>Dev Craft</strong>.
+        </p>
+
+        <div class="callout-grid">
+          <article class="callout">
+            <strong>Responsavel pelo produto</strong>
+            <span>
+              DEV CRAFT LTDA<br />
+              CNPJ 61.174.672/0001-08<br />
+              D-U-N-S 572031518<br />
+              Responsavel: Bruno Ferreira Santos, CEO
+            </span>
+          </article>
+
+          <article class="callout">
+            <strong>Contato para suporte e privacidade</strong>
+            <span>
+              Suporte PalmFit:
+              <a href="mailto:palmfit@devcraftltda.space"
+                >palmfit@devcraftltda.space</a
+              ><br />
+              Contato institucional:
+              <a href="mailto:brunoferreirasantos.dev@gmail.com"
+                >brunoferreirasantos.dev@gmail.com</a
+              ><br />
+              Telefone: <a href="tel:+5565984696397">+55 (65) 98469-6397</a>
+            </span>
+          </article>
+        </div>
+
+        <div class="policy">
+          <section>
+            <p><strong>Ultima atualizacao: Maio de 2026</strong></p>
+            <p>
+              Esta Politica de Privacidade descreve como coletamos, usamos,
+              retemos, compartilhamos e excluimos suas informacoes pessoais ao
+              utilizar o aplicativo PalmFit, disponivel publicamente nas lojas e
+              canais oficiais mantidos pela DEV CRAFT LTDA.
+            </p>
+            <p>
+              Ao utilizar o aplicativo, voce concorda com a coleta e o uso de
+              suas informacoes de acordo com esta politica.
+            </p>
+          </section>
+
+          <section>
+            <h2>1. Coleta de Informacoes Pessoais</h2>
+            <p>
+              Coletamos informacoes pessoais que voce nos fornece diretamente,
+              bem como dados coletados automaticamente durante o uso do
+              aplicativo.
+            </p>
+
+            <h3>Informacoes fornecidas por voce</h3>
+            <ul>
+              <li>
+                <strong>Dados de registro:</strong> caso voce utilize a
+                sincronizacao com o Firebase, podemos armazenar dados de perfil
+                como nome, e-mail e foto de perfil.
+              </li>
+              <li>
+                <strong>Dados de login:</strong> o aplicativo permite que voce
+                faca login com sua conta Google. Ao escolher essa opcao,
+                coletamos as informacoes de perfil publicamente disponiveis
+                fornecidas pelo Google.
+              </li>
+            </ul>
+
+            <h3>Informacoes coletadas automaticamente</h3>
+            <ul>
+              <li>
+                <strong>Dados do dispositivo:</strong> coletamos informacoes
+                sobre seu dispositivo, incluindo tipo, modelo, sistema
+                operacional, identificadores unicos e informacoes de rede.
+              </li>
+              <li>
+                <strong>Localizacao geografica:</strong> caso voce conceda
+                permissao, coletamos sua localizacao geografica para fornecer
+                funcionalidades baseadas em geolocalizacao.
+              </li>
+              <li>
+                <strong>Dados de uso:</strong> registramos informacoes sobre
+                como voce interage com o aplicativo, incluindo paginas
+                acessadas, recursos utilizados e tempo de uso.
+              </li>
+              <li>
+                <strong>Endereco IP:</strong> coletamos seu endereco IP para
+                fins de seguranca, prevencao de fraudes e analise de dados.
+              </li>
+              <li>
+                <strong>Identificadores de publicidade:</strong> coletamos
+                identificadores de publicidade do dispositivo para personalizar
+                anuncios exibidos.
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>2. Uso das Informacoes Coletadas</h2>
+            <p>
+              As informacoes coletadas sao usadas para as seguintes finalidades:
+            </p>
+            <ul>
+              <li>
+                <strong>Melhorar a experiencia:</strong> usamos dados de uso e
+                comportamento para entender como o aplicativo e utilizado, o que
+                nos permite corrigir bugs e melhorar a experiencia.
+              </li>
+              <li>
+                <strong>Comunicacao:</strong> utilizamos seu e-mail para enviar
+                notificacoes sobre o aplicativo e comunicar novidades,
+                funcionalidades ou outras informacoes relevantes.
+              </li>
+              <li>
+                <strong>Funcionalidades especificas:</strong> a localizacao
+                geografica e usada para fornecer servicos e funcionalidades que
+                dependem de geolocalizacao, como mapas.
+              </li>
+              <li>
+                <strong>Personalizacao de anuncios:</strong> usamos
+                identificadores de publicidade para exibir anuncios relevantes.
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>3. Retencao e Exclusao de Dados</h2>
+            <h3>Retencao de dados</h3>
+            <p>
+              Os dados coletados pelo PalmFit sao retidos enquanto voce utiliza
+              o aplicativo e mantem sua conta ativa, quando aplicavel.
+            </p>
+            <ul>
+              <li>
+                Dados armazenados localmente no dispositivo, como configuracoes,
+                favoritos, historico, treinos e diario de nutricao, permanecem
+                no dispositivo enquanto o aplicativo estiver instalado.
+              </li>
+              <li>
+                Dados sincronizados com o Firebase Firestore sao mantidos
+                enquanto sua conta de sincronizacao permanecer ativa.
+              </li>
+            </ul>
+            <p>
+              Nao ha prazo de retencao automatico; os dados sao mantidos ate que
+              voce solicite a exclusao ou desinstale o aplicativo.
+            </p>
+
+            <h3>Como excluir seus dados</h3>
+            <p>
+              Para excluir seus dados do aplicativo, use a opcao "Excluir conta
+              e dados" disponivel na tela de Perfil, quando estiver usando
+              sincronizacao com o Firebase. Essa acao:
+            </p>
+            <ul>
+              <li>remove sua conta do Firebase Authentication;</li>
+              <li>
+                apaga backups e dados armazenados em nuvem no Firestore em
+                <code>users/{uid}</code>;
+              </li>
+              <li>
+                limpa os dados de usuario salvos localmente no dispositivo.
+              </li>
+            </ul>
+            <p>
+              Se voce nao estiver usando a sincronizacao com Firebase, os dados
+              locais podem ser excluidos desinstalando o aplicativo.
+            </p>
+            <p>
+              Apos a exclusao, nao mantemos seus dados pessoais no app ou no
+              servidor, salvo obrigacoes legais.
+            </p>
+          </section>
+
+          <section>
+            <h2>4. Controladora e Contato</h2>
+            <p>
+              A DEV CRAFT LTDA e a organizacao controladora e responsavel pelas
+              operacoes publicas do PalmFit neste dominio.
+            </p>
+            <ul>
+              <li>Razao social: DEV CRAFT LTDA</li>
+              <li>Nome fantasia: Dev Craft</li>
+              <li>CNPJ: 61.174.672/0001-08</li>
+              <li>D-U-N-S: 572031518</li>
+              <li>
+                Endereco: Rua Ouvideo Guimaraes, 66, Centro, Santa Maria da
+                Vitoria - BA, CEP 47640-000
+              </li>
+              <li>
+                E-mail institucional:
+                <a href="mailto:brunoferreirasantos.dev@gmail.com"
+                  >brunoferreirasantos.dev@gmail.com</a
+                >
+              </li>
+              <li>
+                E-mail de suporte PalmFit:
+                <a href="mailto:palmfit@devcraftltda.space"
+                  >palmfit@devcraftltda.space</a
+                >
+              </li>
+            </ul>
+          </section>
+        </div>
+      </main>
+
+      <footer class="footer">
+        <p>
+          <strong>DEV CRAFT LTDA</strong><br />
+          Empresa responsavel pelo PalmFit e pelos canais publicos em
+          devcraftltda.space.
+        </p>
+        <p>
+          <a href="./index.html">Site institucional</a><br />
+          <a
+            href="https://play.google.com/store/apps/details?id=com.tools.palmfit"
+            target="_blank"
+            rel="noreferrer"
+            >Google Play</a
+          >
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>

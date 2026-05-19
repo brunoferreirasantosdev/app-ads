@@ -13,8 +13,8 @@ const currentFilePath = fileURLToPath(import.meta.url);
 const appAdsRoot = path.dirname(currentFilePath);
 const repoRoot = path.resolve(appAdsRoot, "..");
 const sourceRoot = path.join(repoRoot, "palmfit-site", "out");
-const sourceIndexPath = path.join(sourceRoot, "index.html");
-const appAdsIndexPath = path.join(appAdsRoot, "index.html");
+const sourceIndexPath = path.join(sourceRoot, "palmfit.html");
+const appAdsIndexPath = path.join(appAdsRoot, "palmfit.html");
 const domain = readFileSync(path.join(appAdsRoot, "CNAME"), "utf8").trim();
 
 let html = readFileSync(sourceIndexPath, "utf8");
